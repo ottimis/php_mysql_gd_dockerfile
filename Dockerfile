@@ -1,4 +1,5 @@
 FROM php:7.3-apache
+ENV TZ=Europe/Rome
 RUN apt-get update \
     && apt-get install --no-install-recommends -y zip libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev \
     && rm -rf /var/lib/apt/lists/* \
@@ -7,7 +8,8 @@ RUN apt-get update \
     && printf '[PHP]\ndate.timezone = "Europe/Rome"\n' > /usr/local/etc/php/conf.d/tzone.ini \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/bin --filename=composer \
-    && sed 's/^;date\.timezone[[:space:]]=.*$/date.timezone = "Europe\/Rome"/' \
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+    # && sed 's/^;date\.timezone[[:space:]]=.*$/date.timezone = "Europe\/Rome"/' \
     && a2enmod rewrite
 # Slim framework
 COPY misc/.htaccess /var/www/html
