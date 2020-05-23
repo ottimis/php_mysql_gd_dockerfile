@@ -1,7 +1,7 @@
 FROM php:7.3-apache
 ENV TZ=Europe/Rome
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y zip libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libxml2-dev \
+    && apt-get install --no-install-recommends -y zip unzip libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libxml2-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include \
     && docker-php-ext-configure soap --enable-soap \
