@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM php:7.4-apache
 ENV TZ=Europe/Rome
 RUN apt-get update \
     && apt-get install --no-install-recommends -y zip unzip libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libxml2-dev \
